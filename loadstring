@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/annon121111111/pets-go-auto-open/refs/heads/main/pets%20go")();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/annon121111111/pets-go-auto-open/refs/heads/main/pets%20go"))();
